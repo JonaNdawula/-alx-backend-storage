@@ -11,7 +11,7 @@ BEGIN
  
     SELECT id INTO `project_id` FROM projects WHERE name = `project_name`
 
-    IF `project_id` IS NULL THEN
+    IF `project_id` = 0 THEN
 	INSERT INTO projects (name) VALUES (`project_name`);
 	SET `project_id` = LAST_INSERT_ID();
     END IF;

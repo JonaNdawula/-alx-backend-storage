@@ -54,9 +54,4 @@
 
 11. No table for a meeting
 	An SQL script that creates a view need_meeting that lists all students that have a score under 80 (strict) and no last_meeting or more than 1 month.
-
-12. Average weighted score
-	An SQL script that creates a stored procedure ComputeAverageWeightedScoreForUser that computes and store the average weighted score for a student.k
-
-13. Average weighted score for all!
-	An SQL script that creates a stored procedure ComputeAverageWeightedScoreForUsers that computes and store the average weighted score for all students.
+.

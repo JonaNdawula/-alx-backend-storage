@@ -2,10 +2,11 @@
 -- AddBonus which adds a new correction for a student
 
 DELIMITER//
+DROP PROCEDURE IF EXISTS AddBonus;
 CREATE PROCEDURE AddBonus( IN user_id INT, IN project_name VARCHAR(255), IN score INT
 )
 BEGIN
-   INSERT INTO projects(name)
+   INSERT INTO projects (name)
    SELECT project_name WHERE
    project_name NOT IN (SELECT name FROM projects);
 

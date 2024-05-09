@@ -8,13 +8,13 @@ CREATE PROCEDURE AddBonus( IN user_id INT, IN project_name VARCHAR(255), IN scor
 BEGIN
    DECLARE project_id INT;
 
-   IF NOT EXISTS (SELECT 1 FROM projects WHERE name=project_name) THEN
-      INSERT INTO projects (name) VALUES (project_name);
-      SET project_id = LAST_INSSET_ID();
-   ELSE
-      SET project_id = (SELECT id FROM projects WHERE name = project_name);
+   SELECT idINTO project_id FROM projects WHERE name = project_name;
+
+   IF project_id IS NULL THEN
+      INSRT INTO projects (name) VALUES (project_name);
+      SET project_id = LAST_INSERT_ID();
    END IF;
-   
+
    INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, project_id, score );
 END//
 DELIMITER;

@@ -8,7 +8,7 @@ CREATE PROCEDURE AddBonus( IN user_id INT, IN project_name VARCHAR(255), IN scor
 BEGIN
    DECLARE project_id INT;
 
-   SELECT idINTO project_id FROM projects WHERE name = project_name;
+   SELECT id INTO project_id FROM projects WHERE name = project_name;
 
    IF project_id IS NULL THEN
       INSRT INTO projects (name) VALUES (project_name);

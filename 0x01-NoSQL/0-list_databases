@@ -1,0 +1,2 @@
+// Used to show all databases in the mongoDB server
+show dbs

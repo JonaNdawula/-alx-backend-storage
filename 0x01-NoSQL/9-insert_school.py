@@ -1,4 +1,4 @@
-#!/usr/bin/env pyrthon3
+#!/usr/bin/env python3
 """
 This module lists all documents in
 a collection

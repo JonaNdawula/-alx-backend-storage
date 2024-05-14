@@ -26,5 +26,5 @@ status_get_count = collection.count_documents({'methods': 'GET',
 print(f'{total_logs} logs')
 print('Methods:')
 for method, count in zip(methods, method_count):
-    print(f'\t{method}: {count}')
-print(f'GET /status: {status_get_count}')
+    print(f'\tmethod {method}: {count}')
+print(f'{status_get_count}: status check')

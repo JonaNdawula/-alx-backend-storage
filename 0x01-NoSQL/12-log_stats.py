@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
+
 """
 Script using pymongo
 to get required statistics
 """
-
 
 from pymongo import MongoClient
 

@@ -37,4 +37,8 @@ def cache_result(method: Callable) -> Callable:
 @cache_result
 def get_page(url: str) -> str:
     response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(
+            f"HTTP request failed with status"
+            f"code {response.status_code}")
     return response.text

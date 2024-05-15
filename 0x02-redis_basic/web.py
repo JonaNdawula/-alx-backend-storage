@@ -19,7 +19,8 @@ def count_calls(method: Callable) -> callable:
 
 
 def cache_result(method: Callable) -> Callable:
-    @functoools.wraps(url: str) -> str:
+    @functools.wraps(method)
+    def wrapper(url: str) -> str:
         key = f"cache:{url}"
         cached_result = _redis.get(key)
         if cached_result is not None:

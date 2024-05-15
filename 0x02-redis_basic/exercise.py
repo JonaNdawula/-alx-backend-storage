@@ -16,6 +16,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -27,6 +28,7 @@ def call_history(method: Callable) -> Callable:
         return result
     return wrapper
 
+
 def replay(method: Callable):
     inputs_key = f"{method.__qualname__}:inputs}"
     outputs_key = f"{method.__qualname__}:outputs"
@@ -36,7 +38,9 @@ def replay(method: Callable):
     inputs = method.__self__._redis.lrange(inputs_key, 0, -1)
     outputs = methods.__self__._redis.lrange(outputs_key, 0, -1)
     for inp, out in zip(inputs, outputs):
-        print(f"{method.__qualname__}(*{inp.decode('utf-8'}) -> {out.decode('utf-8')}")
+        print(
+            f"{method.__qualname__}(*{inp.decode('utf-8'}) -> "
+            f"{out.decode('utf-8')}")
 
 
 class Cache:
@@ -60,7 +64,10 @@ class Cache:
     def get(self, key: str, func: Optional[Callable] = None):
         data = self._redis.get(key)
         if data is not None and func:
-            data = func(data.decode('utf-8')) if func != int else func(int(data))
+            if func != int:
+                data = func(data.decode('utf-8'))
+            else:
+                data = func(int(data))
         return data
 
     def get_str(self, key: str) -> str:

@@ -2,6 +2,7 @@
 """
 This module contains redis db
 """
+
 import redis
 import uuid
 from typing import Union, Callable, Optional

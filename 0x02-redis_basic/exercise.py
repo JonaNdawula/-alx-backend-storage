@@ -9,6 +9,9 @@ import functools
 
 
 def count_calls(method: Callable) -> Callable:
+    """
+    function counts calls
+    """
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         key = method.__qualname__
@@ -18,6 +21,9 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
+    """
+    function displays call history
+    """
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         inputs_key = f"{method.__qualname__}:inputs"
@@ -30,6 +36,9 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(method: Callable):
+    """
+    function replays
+    """
     inputs_key = f"{method.__qualname__}:inputs}"
     outputs_key = f"{method.__qualname__}:outputs"
     count_key = method.__qualname__
@@ -45,12 +54,18 @@ def replay(method: Callable):
 
 class Cache:
     def __init__(self):
+        """
+        Is an instance of Redis
+        """
         self._redis = redis.Redis()
         self._redis.flushdb()
 
     @count_calls
     @call_history
     def store(self, data: Union[str, bytes, int, float]) -> str:
+        """
+        Function takes data arg and returns String
+        """
         random_key = str(uuid.uuid4())
         if isinstance(data, str):
             data = data.encode('utf-8')
@@ -62,6 +77,9 @@ class Cache:
         return random_key
 
     def get(self, key: str, func: Optional[Callable] = None):
+        """
+        Gets data stored in redis
+        """
         data = self._redis.get(key)
         if data is not None and func:
             if func != int:
@@ -71,7 +89,13 @@ class Cache:
         return data
 
     def get_str(self, key: str) -> str:
+        """
+        Gets a string
+        """
         return self.get(key, func=lambda x: x)
 
     def get_int(self, key: str) -> int:
+        """
+        Gets an int
+        """
         return self.get(key, func=int)

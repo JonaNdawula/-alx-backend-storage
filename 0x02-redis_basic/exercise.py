@@ -27,8 +27,6 @@ class Cache:
         data = self._redis.get(key)
         if data is not None and func:
             data = func(data.decode('utf-8')) if func != int else func(int(data))
-            if func:
-                data = func(data)
         return data
 
     def get_str(self, key: str) -> str:

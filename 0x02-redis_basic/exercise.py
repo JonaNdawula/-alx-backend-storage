@@ -82,12 +82,24 @@ class Cache:
         Gets data stored in redis
         """
         data = self._redis.get(key)
-        if data is not None and func:
-            if func != int:
-                data = func(data.decode('utf-8'))
+        if data is not None:
+            if func:
+                if func == int:
+                    data = func(int(data))
+                else:
+                    data = func(data.decode('utf-8'))
             else:
-                data = func(int(data))
+                try:
+                    data = data.decode('utf-8')
+                except UnicodeDecodeError:
+                    try:
+                        data = int(data)
+                    except ValueError:
+                        pass
         return data
+
+
+
 
     def get_str(self, key: str) -> str:
         """

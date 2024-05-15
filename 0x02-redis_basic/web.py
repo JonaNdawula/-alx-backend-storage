@@ -1,5 +1,7 @@
-#!/usr/bin/env python3
+#!/uisr/bin/env python3
 """
+This moddule contains the count_callls function
+the cache_result and get_page functions
 """
 import functools
 import redis

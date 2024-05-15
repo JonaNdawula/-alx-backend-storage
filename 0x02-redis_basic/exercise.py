@@ -23,8 +23,10 @@ class Cache:
 
     def get(self, key: str, func: Optional[Callable] = None):
         data = self._redis.get(key)
-        if func:
-            data = func(data)
+        if data is not None:
+            data = data.decode('utf-8')
+            if func:
+                data = func(data)
         return data
 
     def get_str(self, key: str) -> str:

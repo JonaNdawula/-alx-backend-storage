@@ -40,7 +40,7 @@ def replay(method: Callable):
     """
     function replays
     """
-    inputs_key = f"{method.__qualname__}:inputs}"
+    inputs_key = f"{method.__qualname__}:inputs"
     outputs_key = f"{method.__qualname__}:outputs"
     count_key = method.__qualname__
     count = method.__self__._redis.get(count_key)
@@ -87,7 +87,7 @@ class Cache:
                 if func == int:
                     data = func(int(data))
                 else:
-                    data = func(data.decode('utf-8'))
+                    data = data.decode('utf-8')
             else:
                 try:
                     data = data.decode('utf-8')
@@ -102,7 +102,7 @@ class Cache:
         """
         Gets a string
         """
-        return self.get(key, func=lambda x: x)
+        return self.get(key, func=lambda x: x.decode('utf-8'))
 
     def get_int(self, key: str) -> int:
         """

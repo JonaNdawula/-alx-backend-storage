@@ -46,7 +46,7 @@ def replay(method: Callable):
     count = method.__self__._redis.get(count_key)
     print(f"{method.__qualname} was called {count.decode('utf-8')} times:")
     inputs = method.__self__._redis.lrange(inputs_key, 0, -1)
-    outputs = methods.__self__._redis.lrange(outputs_key, 0, -1)
+    outputs = method.__self__._redis.lrange(outputs_key, 0, -1)
     for inp, out in zip(inputs, outputs):
         print(
             f"{method.__qualname__}(*{inp.decode('utf-8'}) -> "

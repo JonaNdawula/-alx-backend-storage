@@ -21,7 +21,7 @@ class Cache:
         self._redis.set(random_key, data)
         return random_key
 
-    def get(self, key: str, func: Optional[callable] = None):
+    def get(self, key: str, func: Optional[Callable] = None):
         data = self._redis.get(key)
         if func:
             data = func(data)

@@ -98,9 +98,6 @@ class Cache:
                         pass
         return data
 
-
-
-
     def get_str(self, key: str) -> str:
         """
         Gets a string
